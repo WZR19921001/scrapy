@@ -4,6 +4,7 @@
 #
 # See documentation in:
 # https://doc.scrapy.org/en/latest/topics/spider-middleware.html
+import base64
 
 from scrapy import signals
 
@@ -101,3 +102,15 @@ class DoubanDownloaderMiddleware(object):
 
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
+
+#ip地址代理 用来做身份的伪装：
+class my_proxy(object):
+    def process_request(self,request,spider):
+        #代理服务器地址和端口号
+        request.meta['proxy'] = 'http-cla.abuyun.com:9030'
+        #阿布云用户密码
+        proxy_name_pass = b'H2D74ZZ1CU7C908C:1A9BC6C55A0D370F'
+        #用户名密码的加密
+        encode_pass_name = base64.b64encode(proxy_name_pass)
+        #http头
+        request.headers['Proxy-Authorization'] = 'Basic '+ encode_pass_name.decode()

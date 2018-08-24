@@ -52,9 +52,10 @@ ROBOTSTXT_OBEY = True
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    'douban.middlewares.DoubanDownloaderMiddleware': 543,
-#}
+DOWNLOADER_MIDDLEWARES = {
+    #'douban.middlewares.DoubanDownloaderMiddleware': 543,
+    'douban.middlewares.my_proxy': 543,
+}
 
 # Enable or disable extensions
 # See https://doc.scrapy.org/en/latest/topics/extensions.html
